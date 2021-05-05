@@ -82,7 +82,7 @@ module.exports = function(client, config) {
 						//Make sure member actually has role
 						(member.roles.cache.get(role))
 					);
-					await member.removeRoles(rolesToRemove)
+					await member.roles.remove(rolesToRemove)
 						.catch(error => console.error(error));
 				}
 			})();
