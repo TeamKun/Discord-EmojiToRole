@@ -1,6 +1,6 @@
 import { Client } from "discord.js"
 
-const bot = new Client()
+const bot = new Client({ partials: ['USER', 'REACTION', 'MESSAGE'] })
 
 import config from "./config.json"
 

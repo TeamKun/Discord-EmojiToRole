@@ -21,9 +21,9 @@ module.exports = function(client, config) {
 		.on("messageReactionAdd", (messageReaction, user) => {
 			//Bot should not react to its own reactions
 			if (user == client.user) return;
-			var member = messageReaction.message.guild.members.cache.get(user.id);
-			var emojiDiscriminator = getEmojiDiscriminator(messageReaction.emoji);
 			(async () => {
+				var member = await messageReaction.message.guild.members.fetch(user.id);
+				var emojiDiscriminator = getEmojiDiscriminator(messageReaction.emoji);
 				for (var { channel, reactions, disjoint } of config) {
 					if (channel != messageReaction.message.channel.id) continue;
 					var rolesNew = [];
@@ -58,9 +58,9 @@ module.exports = function(client, config) {
 		.on("messageReactionRemove", (messageReaction, user) => {
 			//Bot should not react to its own reactions.
 			if (user == client.user) return;
-			var member = messageReaction.message.guild.members.cache.get(user.id);
-			var emojiDiscriminator = getEmojiDiscriminator(messageReaction.emoji);
 			(async () => {
+				var member = await messageReaction.message.guild.members.fetch(user.id);
+				var emojiDiscriminator = getEmojiDiscriminator(messageReaction.emoji);
 				for (var { disjoint, channel, reactions } of config) {
 					//Make sure we're not in "disjoint" mode
 					if (disjoint) continue;
